@@ -1,7 +1,6 @@
-# PTR-UFAM
-Repositório feito para guardar o desenvolvimento do trabalho de PTR
+# Lab01
 
-Descrição dos problemas:
+Descrição do Lab01:
 
 
 1.1 - Dstring (opcional)

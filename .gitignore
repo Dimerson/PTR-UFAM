@@ -1,0 +1,5 @@
+*.o
+*/my_program
+*.exe
+*.out
+
