@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "vetor.h"
 #include "matrix.h"
 #include "dstring.h"
 #include "integral.h"
