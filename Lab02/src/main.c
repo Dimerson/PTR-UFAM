@@ -12,6 +12,16 @@ double seno(double x) {
     return sin(x);
 }
 
+Vetor* escrever_saida(FILE *f, Vetor* V)
+{
+	if (V == NULL)
+		return V;
+
+	fprintf(f,"%.5f ", V->valor);
+	escrever_saida(f,V->prox);
+	return V;
+}
+
 
 int main()
 {
@@ -25,6 +35,8 @@ int main()
 	Vetor* vetor_seno = NULL;
 	Vetor* vetor_cos = NULL;
 	Vetor* vetor_deg = NULL;
+	Dstring* nome_arquivo;
+	char armazena_nome[50];
 
 	float V1[2][1] = {{1},{1}};
 	float V2[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
@@ -53,8 +65,15 @@ int main()
 	xt = cria_matrix(3,1);
 	yt = cria_matrix(3,1);
 
+
 	printf("Escolha o número de divisões: ");
 	scanf("%d", &n_divisoes);
+	printf("\nDigite o nome do arquivo de saída (já com a extensão): ");
+	scanf("%s",armazena_nome);
+
+	nome_arquivo = aloca_dstring("files/");
+	nome_arquivo = append_dstring(nome_arquivo,armazena_nome);
+
 	printf("\n\n");
 	tam_janela = (float)20/n_divisoes;
 
@@ -97,6 +116,21 @@ int main()
 	printf("Grau: \n");
 	printa_vetor(vetor_deg);
 	printf("\n\n");
+
+	FILE *arquivo;
+    arquivo = fopen(nome_arquivo->data, "w");
+
+    escrever_saida(arquivo,vetor_seno);
+    fprintf(arquivo,"\n\n");
+    escrever_saida(arquivo,vetor_cos);
+    fprintf(arquivo,"\n\n");
+    escrever_saida(arquivo,vetor_deg);
+    fprintf(arquivo,"\n\n");
+
+    vetor_seno = libera_vetor(vetor_seno);
+    vetor_cos = libera_vetor(vetor_cos);
+    vetor_deg = libera_vetor(vetor_deg);
+    nome_arquivo = libera_dstring(nome_arquivo);
 
 
 	return 0;
