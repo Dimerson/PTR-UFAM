@@ -6,25 +6,25 @@ Vetor* printa_elemento(Vetor *lista)
 {
 	if (lista == NULL)
 	{
-		print("Lista vazia!!!");
+		printf("Lista vazia!!!");
 		return lista;
 	}
 
 	if (lista->prox == NULL)
 	{
-		print("%.5f", lista->valor);
+		printf("%.4f", lista->valor);
 		return lista;
 	}
 
-	print("%.5f ", lista->valor);
+	printf("%.4f ", lista->valor);
 	printa_elemento(lista->prox);
 }
 
 void printa_vetor(Vetor *lista)
 {
-	print("[");
-	printa_elemento(Lista);
-	print("]");
+	printf("[");
+	printa_elemento(lista);
+	printf("]");
 }
 
 Vetor* cria_cedula(Vetor *lista, double value)
@@ -37,10 +37,10 @@ Vetor* cria_cedula(Vetor *lista, double value)
 
 Vetor* add_elemento(Vetor *lista, double elemento)
 {
-	if (Lista == NULL)
-		return cria_cedula(Lista, elemento);
+	if (lista == NULL)
+		return cria_cedula(lista, elemento);
 
-	lista->prox = add_elemento(lista->prox);
+	lista->prox = add_elemento(lista->prox, elemento);
 	return lista;
 }
 
