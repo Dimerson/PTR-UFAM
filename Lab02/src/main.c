@@ -8,8 +8,14 @@
 #include "modelo.h"
 
 // Função seno para integrar: f(x) = sin(x)
-double seno(double x) {
+double seno(double x)
+{
     return sin(x);
+}
+
+double coss(double x)
+{
+	return cos(x);
 }
 
 Vetor* escrever_saida(FILE *f, Vetor* V)
@@ -30,7 +36,7 @@ int main()
 	float tam_janela;
 	iteracoes = 1;
 	double resultado, x3;
-	Integral* integral_seno;
+	Integral *integral_seno, *integral_cosseno, *integral_angulo;
 	float t;
 	Vetor* vetor_seno = NULL;
 	Vetor* vetor_cos = NULL;
@@ -77,12 +83,15 @@ int main()
 	printf("\n\n");
 	tam_janela = (float)20/n_divisoes;
 
-	for(t = 0; t <= 20; t = t + tam_janela)
+	for(t = 0 + tam_janela; t <= 20; t = t + tam_janela)
 	{
 		x3 = u_k(t);
-		estado->data[0][0] = seno(x3);
-		estado->data[1][0] = cos(x3);
-		u->data[1][0] = x3;
+		integral_seno = cria_integral(seno, t-tam_janela, t, 100);
+		integral_cosseno = cria_integral(coss, t-tam_janela, t, 100);
+		integral_angulo = cria_integral(u_t, t-tam_janela, t, 100);
+		estado->data[0][0] = calcula_integral(integral_seno);
+		estado->data[1][0] = calcula_integral(integral_cosseno);
+		u->data[1][0] = calcula_integral(integral_angulo);
 		xt = multiplica_matrix(estado,u);
 		yt = multiplica_matrix(ym,xt);
 
